@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{{message}}
+
+<div class='col-md-6 offset-md-3'>
+    <center>
+<h3> Search Tweet </h3></br>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="search tweet" name="search" class="form-control"></br>
+
+        <button type="submit" class="btn btn-secondary">Search!</button>
+    </form></br></br>
+</center>
+
+    {% if search %}
+    <center><h3>You searched for: {{ search }}</h3></center>
+    {% endif %}
+
+
+
+    {% if searched %}
+  {% for tweet in searched %}
+   
+   
+    <div class="alert alert-dark" role='alert'>
+                    <div class="container">
+                        <div class="row">
+                            <div class='col-1'>
+                    {% if tweet.user.profile.profile_image %}
+                    <img src="{{tweet.user.profile.profile_image.url}}" width="50" height="50" class="rounded-circle" alt="{{profile.user.username}}">
+                    {% else %}
+                    <img src="{% static 'image/user.jpg' %}" width="50" height="50" class="rounded-circle" alt="{{profile.user.username}}">
+                    {% endif %}
+                </div>
+                <div class="col-10">
+                    {{tweet.body}}</br>
+                    <small class="text-muted">
+                        ({{ tweet.created_at}})By
+                        @{{ tweet.user.username }}
+                        {{tweet.number_of_likes}} 
+
+                        {% if user in tweet.likes.all %}
+                        <a href="{% url 'like-tweet' tweet.id %}">
+                            <i class="fa-solid fa-heart" style="color:red;"></i></a>
+                        {% else %}
+                        <a href="{% url 'like-tweet' tweet.id %}">
+                            <i class="fa fa-heart-o" style="color:red;"></i></a>
+                        {% endif %}
+                        &nbsp;
+                        <a href="{% url 'share-tweet' tweet.id %}">
+                            <i class="fa-solid fa-share" style="color:grey;"></i>
+                        </a>
+                    </small>
+                 </div></br>
+                </div>
+            </div>
+            </div>
+            
+  {% endfor %}
+{% endif %}
+</div>
+</div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{{ message }}
+
+{% block content %}
+<div class='col-md-6 offset-md-3'>
+	<center><h3>Update</h3></center>
+
+		<div class="screen__content">
+			<form method="POST" action="{% url 'update-user' %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ user_form.as_p }}</br>
+				{{ profile_form.as_p }}
+				<center>
+				<button class="button login__submit">
+					<span class="button__text">Update</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>
+				</center>				
+			</form>
+		</div>
+</div>
+</br></br>
+{% endblock %}

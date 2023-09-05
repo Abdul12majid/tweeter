@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{{message}}
+
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-8">
+
+<h3> HomePage </h3></br>
+
+{% if tweets %}
+  {% for tweet in tweets %}
+
+    <div class="alert alert-dark" role='alert'>
+                    <div class="container">
+                        <div class="row">
+                            <div class='col-1'>
+                    {% if tweet.user.profile.profile_image %}
+                    <img src="{{tweet.user.profile.profile_image.url}}" width="50" height="50" class="rounded-circle" alt="{{profile.user.username}}">
+                    {% else %}
+                    <img src="{% static 'image/user.jpg' %}" width="50" height="50" class="rounded-circle" alt="{{profile.user.username}}">
+                    {% endif %}
+                </div>
+                <div class="col-10">
+                    {{tweet.body}}</br>
+                    <small class="text-muted">
+                        ({{ tweet.created_at}})By
+                        @{{ tweet.user.username }}
+                        {{tweet.number_of_likes}} 
+
+
+                        {% if user in tweet.likes.all %}
+                        <a href="{% url 'like-tweet' tweet.id %}">
+                            <i class="fa-solid fa-heart" style="color:red;"></i></a>
+                        {% else %}
+                        <a href="{% url 'like-tweet' tweet.id %}">
+                            <i class="fa fa-heart-o" style="color:red;"></i></a>
+                        {% endif %}
+                        &nbsp;
+                        <a href="{% url 'share-tweet' tweet.id %}">
+                            <i class="fa-solid fa-share" style="color:grey;"></i>
+                        </a>
+                    </small>
+                 </div></br>
+                </div>
+            </div>
+            </div>
+  {% endfor %}
+{% endif %}
+
+</div>
+
+<div class="col-4">
+        </br></br></br>
+    {% if form %}
+    <form method="POST">
+    	{% csrf_token %}
+    	{{ form.as_p }}
+
+    	<button type="submit" class="btn btn-secondary">Meep!</button>
+    </form>
+    {% endif %}
+</div>
+{% endblock %}

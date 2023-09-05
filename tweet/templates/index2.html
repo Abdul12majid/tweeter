@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head    <meta charset="UTF-8">>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="x-icon" href="./image/xfavicon.jpg">
+    <link rel="stylesheet" href="{% static 'style_1.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Home / X</title>
+    <script src="https://kit.fontawesome.com/28fa4b0142.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="all-sections">
+        <div class="left-sect-cover">
+        <div class="left-sect">
+            <div class="navigation">
+                <div class="logo">
+                    <a href="#">
+                        <img src="{% static 'image/xlogo.webp' %}" class="xlogo" alt="xlogo">
+                    </a>
+                </div>
+                <div class="switch">
+                    <span class="appear">
+                    <div class="icons">
+                        <div class="ico-all">
+                            <a href="{% url 'home' %}">
+                            <div class="ico-pic">
+                                <ion-icon name="home" class="img"></ion-icon>
+                            </div>
+                            <div class="ico-text"><p><b>Home</b></p></div>
+                            </a>
+                        </div>
+                        <div class="ico-all">
+                            <a href="{% url 'profile' request.user.id %}">
+                            <div class="ico-pic">
+                                <ion-icon name="search-outline" class="img"></ion-icon>
+                            </div>
+                            <div class="ico-text"><p>Explore</p></div>
+                            </a>
+                        </div>
+                        <div class="ico-all">
+                            <a href="">
+                            <div class="ico-pic">
+                                <ion-icon name="notifications-outline" class="img"></ion-icon>
+                            </div>
+                            <div class="ico-text"><p>Notifications</p></div>
+                            </a>
+                        </div>
+                        <div class="ico-all">
+                            <a href="">
+                            <div class="ico-pic">
+                                <ion-icon name="mail-outline" class="img"></ion-icon>
+                            </div>
+                            <div class="ico-text"><p>Messages</p></div>
+                            </a>
+                        </div>
+                        </span>
+                        <span class="disappear">
+                        <div class="ico-all">
+                            <a href="">
+                            <div class="ico-pic">
+                                <ion-icon name="list-outline" class="img"></ion-icon>
+                            </div>
+                            <div class="ico-text"><p>List</p></div>
+                            </a>
+                        </div>
+                        <div class="ico-all">
+                            <a href="">
+                            <div class="ico-pic">
+                                <ion-icon name="people-outline" class="img"></ion-icon>
+                            </div>
+                            <div class="ico-text"><p>Communities</p></div>
+                            </a>
+                        </div>
+                        <div class="ico-all">
+                            <a href="">
+                            <div class="ico-pic">
+                                <span class="material-symbols-outlined">
+                                    verified
+                                    </span>
+                            </div>
+                            <div class="ico-text"><p>Verified</p></div>
+                            </a>
+                        </div>
+                        <div class="ico-all">
+                            <a href="{% url 'profile' request.user.id %}">
+                            <div class="ico-pic">
+                                <span class="material-symbols-outlined">
+                                    person
+                                    </span>
+                            </div>
+                            <div class="ico-text"><p>Profile</p></div>
+                            </a>
+                        </div>
+                        <div class="ico-all">
+                            <a href="">
+                            <div class="ico-pic">
+                                <span class="material-symbols-outlined">
+                                    pending
+                                    </span>
+                            </div>
+                            <div class="ico-text"><p>More</p></div>
+                            </a>
+                        </div>
+                        <p class="tweet-btn"><a href="#">
+                            Tweet
+                        </a>
+                        </p>
+                        <p class="tweet-btn2">
+                            <span class="material-symbols-outlined">
+                                history_edu
+                                </span>
+                        </p>
+                        <div class="profile">
+                            <div class="profile-img">
+                                {% if profile_user.profile_image %}
+                                <img src="{{ profile_user.profile_image.url }}" alt="" width="40px" height="40px">
+                                {% else %}
+                            <img src="{% static 'image/user.jpg' %}" alt="" width="40px" height="40px">
+                            {% endif %}
+                            </div>
+                            <div class="profile-name">
+                                <h4>{{ profile_user.user.first_name }}</h4>
+                                <p>@{{ profile_user.user.username }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="profile2">
+                            <div class="profile2-img">
+                                <img src="{% static 'image/user.jpg' %}" alt="" width="40px" height="40px">
+                            </div>
+                        </div>
+                        
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="text"></div>
+        </div>
+
+        </div>
+        
+        <div class="main-sect-cover">
+
+            <div class="main-sect">
+
+                <div class="home">
+                    <h3>Home</h3>
+                </div>
+
+                <div class="small-nav">
+                    <div class="sn-for-you">
+                        <h4>For you</h4>
+                    </div>
+                    <div class="sn-following">
+                        <h4>Following</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post-section">
+
+                <div class="post-sect">
+                    <div class="post-img">
+                        {% if profile_user.profile_image %}
+                        <img src="{{ profile_user.profile_image.url }}" alt="">
+                        {% else %}
+                        <img src="{% static 'image/user.jpg' %}" alt="">
+                        {% endif %}
+                    </div>
+                    <form action="{% url 'twitter' %}" method="POST" validate>
+                        {% csrf_token %}
+                    <div class="post-text">
+                        <input type="text" required placeholder="What is happening?!" name="post" id="">
+                    </div>
+                </div>
+
+
+                <div class="post-sect-icons">
+
+                    <div class="ps-icon">
+                        <span class="material-symbols-outlined">
+                            image
+                            </span>
+                            <span class="material-symbols-outlined">
+                                gif_box
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    ballot
+                                    </span>
+                                    <span class="material-symbols-outlined">
+                                        sentiment_satisfied
+                                        </span>
+                                        <span class="material-symbols-outlined">
+                                            tab_recent
+                                            </span>
+                                            <span class="material-symbols-outlined">
+                                                location_on
+                                                </span>
+                    </div>
+
+                    <div class="ps-button">
+                        <button type="submit">Tweet</button>
+                    </div>
+
+                </div>
+                </form>
+
+            </div>
+                     
+
+            <div class="newsfeed-section">
+            {% if tweets %}
+                
+                   {% for tweet in tweets %}    
+                  
+                <div class="newsfeeds">
+                    <div class="newsfeed-img">
+                        {% if tweet.user.profile.profile_image %}
+                    <img src="{{ tweet.user.profile.profile_image.url }}" alt="">
+                        {% else %}
+                    <img src="{% static 'image/user.jpg' %}" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="nf-text">
+                    <div class="newsfeed-name">
+                        <div class="nf-name">
+                            <p>{{ tweet.user.first_name }}</p>&nbsp;
+                        </div>
+                        <div class="text-muted">
+                            <p>&nbsp;@{{ tweet.user.username }} {{tweet.created_at}}</p>
+                        </div>
+                    </div>
+                    <div class="newsfeed-post">
+                        <p>
+                            {{ tweet.body}}
+                        </p>
+                    </div>
+                    </div>
+                    <div class="nf-icon">
+                        <span class="material-symbols-outlined">
+                            more_horiz
+                            </span>
+                    </div>
+                </div></br>
+                <div class="newsfeeds-reactions">
+                    <span class="material-symbols-outlined">
+                        maps_ugc
+                        </span>
+                        <span class="material-symbols-outlined">
+                            cycle
+                            </span>
+                            <span class="material-symbols">
+                                {% if user in tweet.likes.all %}
+                                <a href="{% url 'like-tweet' tweet.id %}">
+                                    <i class="fa-solid fa-heart" style="color:red;"></i></a>&nbsp;<small>{{tweet.number_of_likes}}</small>
+                                {% else %}
+                                <a href="{% url 'like-tweet' tweet.id %}">
+                                    <i class="fa fa-heart-o" style="color:white;"></i></a>&nbsp;<small>{{tweet.number_of_likes}}</small>
+                                {% endif %}
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    bar_chart
+                                    </span>
+                                    <span class="material-symbols-outlined">
+                                        <a href="{% url 'share-tweet' tweet.id %}">
+                                            <i class="fa-solid fa-share" style="color:grey;"></i>
+                                        </a>
+                                        </span>
+                </div>
+                <hr>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+            
+        </div>
+
+        <div class="right-sect-cover">
+
+            <div class="right-sect">
+                <div class="search">
+                    <span class="material-symbols-outlined">
+                        search
+                    </span>
+                    <input type="text" placeholder="Search Twitter">
+                </div>
+            </div>
+
+            <div class="get-verified">
+                <div class="get-verified-head">
+                    <h3>Get verified</h3>
+                    <h5>Subscribe to unlock new features.</h5>
+                    <p><button>Get verified</button></p>
+                </div>
+            </div>
+
+            <div class="trend-section">
+            <div class="trends">
+                <div class="main-trends">
+                <div class="trends-head">
+                    <h3>Trends for you</h3>
+                </div>
+                <div class="gold">
+                    <div class="trending">
+                        <p class="trending1">Trending in Nigeria</p>
+                        <p class="trending2">LGBTQ</p>
+                        <p class="trending1">44k Tweets</p>
+                    </div>
+                    
+                    <div class="trend-icon">
+                        <span class="material-symbols-outlined">
+                            more_horiz
+                        </span>
+                    </div>
+                </div>
+                <div class="gold">
+                    <div class="trending">
+                        <p class="trending1">Trending in Nigeria</p>
+                        <p class="trending2">Cardi B</p>
+                        <p class="trending1">79k Tweets</p>
+                    </div>
+                    
+                    <div class="trend-icon">
+                        <span class="material-symbols-outlined">
+                            more_horiz
+                        </span>
+                    </div>
+                </div>
+                <div class="gold">
+                    <div class="trending">
+                        <p class="trending1">Trending in Nigeria</p>
+                        <p class="trending2">OBI IS COMING</p>
+                        <p class="trending1">51k Tweets</p>
+                    </div>
+                    
+                    <div class="trend-icon">
+                        <span class="material-symbols-outlined">
+                            more_horiz
+                        </span>
+                    </div>
+                </div>
+                <div class="gold">
+                    <div class="trending">
+                        <p class="trending1">Trending in Nigeria</p>
+                        <p class="trending2">#BigBrotherNaijaAllStars</p>
+                        <p class="trending1">145k Tweets</p>
+                    </div>
+                    
+                    <div class="trend-icon">
+                        <span class="material-symbols-outlined">
+                            more_horiz
+                        </span>
+                    </div>
+                </div>
+                <div class="gold">
+                    <div class="trending">
+                        <p class="trending1">Trending in Nigeria</p>
+                        <p class="trending2">Juju punter</p>
+                        <p class="trending1">35k Tweets</p>
+                    </div>
+                    
+                    <div class="trend-icon">
+                        <span class="material-symbols-outlined">
+                            more_horiz
+                        </span>
+                    </div>
+                </div>
+                <div class="gold">
+                    <div class="trending">
+                        <p class="trending1">Trending in Nigeria</p>
+                        <p class="trending2">Mac Allister</p>
+                        <p class="trending1">53k Tweets</p>
+                    </div>
+                    
+                    <div class="trend-icon">
+                        <span class="material-symbols-outlined">
+                            more_horiz
+                        </span>
+                    </div>
+                </div>
+                <div class="gold">
+                    <div class="trending">
+                        <p class="trending1">Trending in Nigeria</p>
+                        <p class="trending2">Biggest Bird</p>
+                        <p class="trending1">13.9k Tweets</p>
+                    </div>
+                    
+                    <div class="trend-icon">
+                        <span class="material-symbols-outlined">
+                            more_horiz
+                        </span>
+                    </div>
+                </div>
+                <div class="gold">
+                    <div class="trending">
+                        <p class="trending1">Trending in Nigeria</p>
+                        <p class="trending2">Barca</p>
+                        <p class="trending1">188k Tweets</p>
+                    </div>
+                    
+                    <div class="trend-icon">
+                        <span class="material-symbols-outlined">
+                            more_horiz
+                        </span>
+                    </div>
+                </div>
+                <div class="gold">
+                    <div class="trending">
+                        <p class="trending1">Trending in Nigeria</p>
+                        <p class="trending2">#Elvish Army</p>
+                        <p class="trending1">967k Tweets</p>
+                    </div>
+                    
+                    <div class="trend-icon">
+                        <span class="material-symbols-outlined">
+                            more_horiz
+                        </span>
+                    </div>
+                </div>
+            
+            </div>
+            
+            </div>
+            </div>
+
+            <div class="who-to-follow">
+                <div class="who-text"><h4>Who to follow</h4></div>
+                {% for profile in all_profile %}
+
+                <div class="follow-container">
+                    <div class="follow-profile">
+                    <div class="newsfeed-img">
+                        {% if profile.profile_image %}
+                        <img src="{{ profile.profile_image.url }}" alt="" width="40px">
+                        {% else %}
+                        <img src="{% static 'image/user.jpg' %}" alt="" width="40px">
+                        {% endif %}
+                    </div>
+                    <div class="username">
+                        <h4>{{ profile.user.first_name }}</h4>
+                        <p>@{{ profile.user.username }}</p>
+                    </div>
+                    </div>
+                    <div class="btn-side">
+                        <div class="follow-btn">
+                            
+                                {% if profile in user.profile.follows.all %}
+                                 <a href="{% url 'unfollow' profile.user.id %}" class="btn btn-primary">Unfollow</a>
+                                {% else %}
+                                <a href="{% url 'follow' profile.user.id %}" class="btn btn-primary">Follow</a>
+                                {% endif %}
+                            
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+
+        </div>
+        
+    </div>
+    <!--mobile side-->
+    <section class="--mobile">
+        <header>
+            <a href="#">
+                <img src="./image/xlogo.webp" alt="logo">
+            </a>
+            <div class="top-nav">
+                <div class="for-you">
+                    <p><a href="#">For you</a></p>
+                </div>
+                <div class="following">
+                    <p><a href="#">Following</a></p>
+                </div>
+            </div>
+        </header>
+        <nav>
+        <div class="nav">
+            <a href="#"><ion-icon name="home" class="img"></ion-icon></a>
+            <a href="#"><ion-icon name="search-outline" class="img"></ion-icon></a>
+            <a href="#"><ion-icon name="notifications-outline" class="img"></ion-icon></a>
+            <a href="#"><ion-icon name="mail-outline" class="img"></ion-icon></a>
+        </div>
+        </nav>
+        <div class="feather">
+            <a href="#">
+            <span class="material-symbols-outlined">
+                history_edu
+                </span>
+            </a>
+        </div>
+        <div class="empty">
+            
+        </div>
+        <div class="post-section2">
+            <div class="ps2">
+                <div class="ps2-img">
+                    <img src="./image/Pinkie.jpeg" alt="profileimg">
+                </div>
+                <div class="ps2-text">
+                    <div class="ps2-post">
+                        <div class="ps2-name">
+                            <p class="name1">
+                                Cara
+                            </p>
+                            <p class="name2">
+                                @Carathef1rst
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ps2-icon">
+                    <span class="material-symbols-outlined">
+                        more_horiz
+                        </span>
+                </div>
+            </div>
+            <div class="ps2-main-post">
+                <p class="post1">
+                    Just in - Cristiano Ronaldo breaks yet another record as he tops Forbes' 
+                            list as the world's most paid athlete with  whooping salary of 200 euros per year! &#128016;.
+                </p>
+            </div>
+            <div class="ps2-reaction">
+                <span class="material-symbols-outlined">
+                    maps_ugc
+                    </span>
+                    <span class="material-symbols-outlined">
+                        cycle
+                        </span>
+                        <span class="material-symbols-outlined">
+                            favorite
+                            </span>
+                            <span class="material-symbols-outlined">
+                                bar_chart
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    upload
+                                    </span>
+            </div>
+        </div>
+        <div class="post-section2">
+            <div class="ps2">
+                <div class="ps2-img">
+                    <img src="./image/Maskoff.jpg" alt="profileimg">
+                </div>
+                <div class="ps2-text">
+                    <div class="ps2-post">
+                        <div class="ps2-name">
+                            <p class="name1">
+                                Yvng
+                            </p>
+                            <p class="name2">
+                                @belikeyvng
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ps2-icon">
+                    <span class="material-symbols-outlined">
+                        more_horiz
+                        </span>
+                </div>
+            </div>
+            <div class="ps2-main-post">
+                <p class="post1">
+                    New drum kit launch guys!! Arccane drops this night. 
+                            Get premium access now! The first 2000 people to secure a license get 
+                            all plug-ins on my website for free and a $50 gift card on my beatstore.
+                </p>
+            </div>
+            <div class="ps2-reaction">
+                <span class="material-symbols-outlined">
+                    maps_ugc
+                    </span>
+                    <span class="material-symbols-outlined">
+                        cycle
+                        </span>
+                        <span class="material-symbols-outlined">
+                            favorite
+                            </span>
+                            <span class="material-symbols-outlined">
+                                bar_chart
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    upload
+                                    </span>
+            </div>
+        </div>
+        <div class="post-section2">
+            <div class="ps2">
+                <div class="ps2-img">
+                    <img src="./image/hoodieguy.jpg" alt="profileimg">
+                </div>
+                <div class="ps2-text">
+                    <div class="ps2-post">
+                        <div class="ps2-name">
+                            <p class="name1">
+                                Shillah
+                            </p>
+                            <p class="name2">
+                                @shillah
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ps2-icon">
+                    <span class="material-symbols-outlined">
+                        more_horiz
+                        </span>
+                </div>
+            </div>
+            <div class="ps2-main-post">
+                <p class="post1">
+                    New song drops on spotify by 12:00. Presave link in my bio. Go check it out NOW!
+                    (P.S This song is absolute FIRE &#128293;&#128293;&#128293;. You will not want to miss it :)
+                </p>
+            </div>
+            <div class="ps2-reaction">
+                <span class="material-symbols-outlined">
+                    maps_ugc
+                    </span>
+                    <span class="material-symbols-outlined">
+                        cycle
+                        </span>
+                        <span class="material-symbols-outlined">
+                            favorite
+                            </span>
+                            <span class="material-symbols-outlined">
+                                bar_chart
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    upload
+                                    </span>
+            </div>
+        </div>
+        <div class="post-section2">
+            <div class="ps2">
+                <div class="ps2-img">
+                    <img src="./image/jade.jpg" alt="">
+                </div>
+                <div class="ps2-text">
+                    <div class="ps2-post">
+                        <div class="ps2-name">
+                            <p class="name1">
+                                Jade
+                            </p>
+                            <p class="name2">
+                                @jadewest
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ps2-icon">
+                    <span class="material-symbols-outlined">
+                        more_horiz
+                        </span>
+                </div>
+            </div>
+            <div class="ps2-main-post">
+                <p class="post1">
+                    Just wanted to say that I love you guys and I really appreciate all the support you all have shown me during this period &#128153;&#128153;. 
+                    <br> 
+                    My mom just beat cancer &#128591;&#128591;<span style="color: rgb(65, 195, 255);">#blessed</span>
+
+                </p>
+            </div>
+            <div class="ps2-reaction">
+                <span class="material-symbols-outlined">
+                    maps_ugc
+                    </span>
+                    <span class="material-symbols-outlined">
+                        cycle
+                        </span>
+                        <span class="material-symbols-outlined">
+                            favorite
+                            </span>
+                            <span class="material-symbols-outlined">
+                                bar_chart
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    upload
+                                    </span>
+            </div>
+        </div>
+        <div class="post-section2">
+            <div class="ps2">
+                <div class="ps2-img">
+                    <img src="./image/redblue.jpg" alt="profileimg">
+                </div>
+                <div class="ps2-text">
+                    <div class="ps2-post">
+                        <div class="ps2-name">
+                            <p class="name1">
+                                Anonymous
+                            </p>
+                            <p class="name2">
+                                @anonymous
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ps2-icon">
+                    <span class="material-symbols-outlined">
+                        more_horiz
+                        </span>
+                </div>
+            </div>
+            <div class="ps2-main-post">
+                <p class="post1">
+                    This is a message to the president of Nigeria, Alhaji Bola Ahmed Tinubu. 
+                            Keep playing. Soon we will reveal your plans to all Nigerians and the world.
+                            <br> We are Anonymous &#128520;&#128520;.                 
+                </p>
+            </div>
+            <div class="ps2-reaction">
+                <span class="material-symbols-outlined">
+                    maps_ugc
+                    </span>
+                    <span class="material-symbols-outlined">
+                        cycle
+                        </span>
+                        <span class="material-symbols-outlined">
+                            favorite
+                            </span>
+                            <span class="material-symbols-outlined">
+                                bar_chart
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    upload
+                                    </span>
+            </div>
+        </div>
+        <div class="post-section2">
+            <div class="ps2">
+                <div class="ps2-img">
+                    <img src="./image/animeboy1.jpg" alt="profileimg">
+                </div>
+                <div class="ps2-text">
+                    <div class="ps2-post">
+                        <div class="ps2-name">
+                            <p class="name1">
+                                Mira
+                            </p>
+                            <p class="name2">
+                                @killamira
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ps2-icon">
+                    <span class="material-symbols-outlined">
+                        more_horiz
+                        </span>
+                </div>
+            </div>
+            <div class="ps2-main-post">
+                <p class="post1">
+                    Nouhaila Benzina became the first player to wear a 
+                    hijab while competing at a senior-level global tournament 
+                    as Morocco beat South Korea 1-0 in Adelaide. ❤️
+                </p>
+            </div>
+            <div class="ps2-reaction">
+                <span class="material-symbols-outlined">
+                    maps_ugc
+                    </span>
+                    <span class="material-symbols-outlined">
+                        cycle
+                        </span>
+                        <span class="material-symbols-outlined">
+                            favorite
+                            </span>
+                            <span class="material-symbols-outlined">
+                                bar_chart
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    upload
+                                    </span>
+            </div>
+        </div>
+    </section>
+    
+    
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{{ message }}
+
+{% block content %}
+<div class='col-md-6 offset-md-3'>
+	<h3>Register</h3>
+<center>
+		<div class="screen__content">
+			<form class="login" method="POST" action="{% url 'register' %}">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button class="button login__submit">
+					<span class="button__text">Register Now</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>				
+			</form>
+			
+		</div>
+		
+</center>
+</div>
+{% endblock %}
