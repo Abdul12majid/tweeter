@@ -55,6 +55,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'tweeter.urls'
 
+CSRF_TRUSTED_ORIGIN = ['https://tweeter-production-32ff.up.railway.app/']
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
