@@ -55,7 +55,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'tweeter.urls'
 
-CSRF_TRUSTED_ORIGINS = ['https://tweeter-production-32ff.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://tweeter-production-32ff.up.railway.app.com']
 
 TEMPLATES = [
     {
