@@ -39,12 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
+    'corsheaders',
     'tweet',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -55,7 +57,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'tweeter.urls'
 
-CSRF_TRUSTED_ORIGINS = ['https://tweeter-production-32ff.up.railway.app.com']
+CSRF_TRUSTED_ORIGINS = ['https://tweeter-production-32ff.up.railway.app']
 
 TEMPLATES = [
     {
