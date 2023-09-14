@@ -1,1 +1,1 @@
-web: gunicorn tweeter.wsgi:application --log-file - --log-level debug
+web: gunicorn tweeter.wsgi --log-file -
