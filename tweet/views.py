@@ -101,9 +101,9 @@ def update_user(request):
 		if user_form.is_valid() and profile_form.is_valid():
 			user_form.save()
 			profile_form.save()
-			login(request, current_user)
+			
 			messages.success(request, ('Info updated'))
-			return redirect('home')
+			return redirect('profile' + request.user.id )
 		return render(request, 'update_user.html', {"user_form":user_form, 'profile_form':profile_form})
 	else:
 		messages.success(request, ('You need to login to view this page'))
@@ -139,6 +139,7 @@ def share_tweet(request, pk):
 
 def twitter(request):
 	if request.user.is_authenticated:
+
 		tweets=Tweet.objects.all().order_by('-created_at')
 		current_user=User.objects.get(id=request.user.id)
 		profile_user=Profile.objects.get(user__id=request.user.id)

@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ls(qq-$5l3wf44ce^r%(hpkwblsd)fwwf^$%9*)j6vvr7)2ga&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -55,9 +55,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = ['https://tweeter-production-32ff.up.railway.app']
+
 ROOT_URLCONF = 'tweeter.urls'
 
-CSRF_TRUSTED_ORIGINS = ['https://tweeter-production-32ff.up.railway.app']
+
 
 TEMPLATES = [
     {
@@ -125,6 +127,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
+#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR, 'static/')
 ]
